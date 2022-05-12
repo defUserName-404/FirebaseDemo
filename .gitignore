@@ -86,3 +86,6 @@ lint/tmp/
 
 # ignore google services file
 **/google-services.json
+
+# ignore proguard-rules
+**/proguard-rules.pro
