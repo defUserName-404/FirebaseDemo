@@ -1,6 +1,6 @@
 package com.defusername.firebasedemo;
 
-import static com.defusername.firebasedemo.FirebaseDatabaseHandler.FIREBASE_DATABASE;
+import static com.defusername.firebasedemo.FirebaseHandler.FIREBASE_DATABASE;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
