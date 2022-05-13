@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FirebaseDemo">
         <activity
+            android:name=".auth.FirebaseAuthentication"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
