@@ -1,4 +1,4 @@
-package com.defusername.firebasedemo.auth;
+package com.defusername.firebasedemo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,13 +9,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.defusername.firebasedemo.R;
+import com.defusername.firebasedemo.auth.FirebaseAuthenticationActivity;
+import com.defusername.firebasedemo.realtime_database.RealtimeDatabaseActivity;
 import com.firebase.ui.auth.AuthUI;
 
 public class SignedInActivity extends AppCompatActivity {
 
 	private TextView textViewUserName, textViewEmail;
-	private Button buttonSignOut;
+	private Button buttonSignOut, buttonWriteToDatabase;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +36,16 @@ public class SignedInActivity extends AppCompatActivity {
 					.signOut(this)
 					.addOnCompleteListener(task -> {
 						if (task.isSuccessful()) {
-							startActivity(new Intent(SignedInActivity.this, FirebaseAuthentication.class));
+							startActivity(new Intent(SignedInActivity.this, FirebaseAuthenticationActivity.class));
 							finish();
 						} else
 							Log.d("SIGNED_IN_ACTIVITY", "Can't log out");
 					});
 		});
+
+		buttonWriteToDatabase.setOnClickListener(view ->
+				startActivity(new Intent(this, RealtimeDatabaseActivity.class))
+		);
 	}
 
 	@SuppressLint("SetTextI18n")
@@ -55,5 +60,6 @@ public class SignedInActivity extends AppCompatActivity {
 		textViewUserName = findViewById(R.id.TextView_UserName);
 		textViewEmail = findViewById(R.id.TextView_Email);
 		buttonSignOut = findViewById(R.id.Button_SignOut);
+		buttonWriteToDatabase = findViewById(R.id.Button_WriteToDatabase);
 	}
 }

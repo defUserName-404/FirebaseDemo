@@ -10,6 +10,7 @@ import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.defusername.firebasedemo.R;
+import com.defusername.firebasedemo.SignedInActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -21,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class FirebaseAuthentication extends AppCompatActivity {
+public class FirebaseAuthenticationActivity extends AppCompatActivity {
 
 	private Button buttonSignIn;
 	private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".auth.SignedInActivity">
+	tools:context=".SignedInActivity">
 
 	<TextView
 		android:id="@+id/TextView_UserName"
@@ -16,7 +16,7 @@
 		app:layout_constraintBottom_toTopOf="@+id/TextView_Email"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintVertical_bias="0.4"
+		app:layout_constraintVertical_bias="0.2"
 		app:layout_constraintVertical_chainStyle="packed" />
 
 	<TextView
@@ -31,6 +31,19 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toBottomOf="@+id/TextView_UserName" />
 
+
+	<Button
+		android:id="@+id/Button_WriteToDatabase"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="20dp"
+		android:text="Write TO Database"
+		app:layout_constraintBottom_toTopOf="@+id/Button_SignOut"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.5"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/TextView_Email" />
+
 	<Button
 		android:id="@+id/Button_SignOut"
 		android:layout_width="match_parent"
@@ -39,7 +52,8 @@
 		android:text="Sign Out"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0.5"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/TextView_Email" />
+		app:layout_constraintTop_toBottomOf="@+id/Button_WriteToDatabase" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
