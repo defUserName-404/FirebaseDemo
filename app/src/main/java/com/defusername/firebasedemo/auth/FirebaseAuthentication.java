@@ -24,10 +24,20 @@ import java.util.Objects;
 public class FirebaseAuthentication extends AppCompatActivity {
 
 	private Button buttonSignIn;
+	private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		if (user != null) {
+			startActivity(createIntentForHomePage());
+
+			finish();
+
+			return;
+		}
+
 		setContentView(R.layout.activity_firebase_authentication);
 
 		initViews();
@@ -53,18 +63,10 @@ public class FirebaseAuthentication extends AppCompatActivity {
 		Toast toast;
 
 		if (result.getResultCode() == RESULT_OK) {
-			Intent signInIntent = new Intent(this, SignInActivity.class);
-
-			FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-			assert user != null;
-			signInIntent.putExtra("USER_NAME", user.getDisplayName());
-			signInIntent.putExtra("EMAIL", user.getEmail());
-
-			startActivity(signInIntent);
+			startActivity(createIntentForHomePage());
 
 			finish();
-			
+
 			return;
 		} else {
 			if (response == null) {
@@ -82,13 +84,24 @@ public class FirebaseAuthentication extends AppCompatActivity {
 		toast.show();
 	}
 
-	public void createSignInIntent() {
+	private Intent createIntentForHomePage() {
+		Intent signInIntent = new Intent(this, SignedInActivity.class);
+
+		assert user != null;
+		signInIntent.putExtra("USER_NAME", user.getDisplayName());
+		signInIntent.putExtra("EMAIL", user.getEmail());
+
+		return signInIntent;
+	}
+
+	private void createSignInIntent() {
 		Intent signInIntent = AuthUI.getInstance()
 				.createSignInIntentBuilder()
 				.setAvailableProviders(Arrays.asList(
 						new AuthUI.IdpConfig.EmailBuilder().build(),
 						new AuthUI.IdpConfig.GoogleBuilder().build())
 				)
+				.setIsSmartLockEnabled(true)
 				.build();
 
 		signInLauncher.launch(signInIntent);
