@@ -17,44 +17,44 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonWriteData;
-    private TextView textViewDisplayData;
-    private final DatabaseReference mRef = FIREBASE_DATABASE.getReference("message");
+	private Button buttonWriteData;
+	private TextView textViewDisplayData;
+	private final DatabaseReference mRef = FIREBASE_DATABASE.getReference("message");
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-        initViews();
-        handleButtonClicks();
-        handleDatabaseRefChanges();
-    }
+		initViews();
+		handleButtonClicks();
+		handleDatabaseRefChanges();
+	}
 
-    private void initViews() {
-        buttonWriteData = findViewById(R.id.Button_WriteData);
-        textViewDisplayData = findViewById(R.id.TextView_DisplayData);
-    }
+	private void initViews() {
+		buttonWriteData = findViewById(R.id.Button_WriteData);
+		textViewDisplayData = findViewById(R.id.TextView_DisplayData);
+	}
 
-    private void handleButtonClicks() {
-        buttonWriteData.setOnClickListener((view) -> {
-            mRef.setValue("Hello darkness my old friend.");
-        });
-    }
+	private void handleButtonClicks() {
+		buttonWriteData.setOnClickListener((view) -> {
+			mRef.setValue("Hello darkness my old friend.");
+		});
+	}
 
-    private void handleDatabaseRefChanges() {
-        mRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value = snapshot.getValue(String.class);
-                textViewDisplayData.setText(value);
-            }
+	private void handleDatabaseRefChanges() {
+		mRef.addValueEventListener(new ValueEventListener() {
+			@Override
+			public void onDataChange(@NonNull DataSnapshot snapshot) {
+				String value = snapshot.getValue(String.class);
+				textViewDisplayData.setText(value);
+			}
 
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                textViewDisplayData.setText("Error " + error);
-            }
-        });
-    }
+			@SuppressLint("SetTextI18n")
+			@Override
+			public void onCancelled(@NonNull DatabaseError error) {
+				textViewDisplayData.setText("Error " + error);
+			}
+		});
+	}
 }
