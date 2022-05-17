@@ -17,6 +17,7 @@ public class SignedInActivity extends AppCompatActivity {
 
 	private TextView textViewUserName, textViewEmail;
 	private Button buttonSignOut, buttonWriteToDatabase;
+	private String username, email;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,7 @@ public class SignedInActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_signed_in);
 
 		initViews();
-		String username = getIntent().getStringExtra("USER_NAME");
-		String email = getIntent().getStringExtra("EMAIL");
-		showData(username, email);
+		showData();
 		handleButtonClicks();
 	}
 
@@ -43,13 +42,20 @@ public class SignedInActivity extends AppCompatActivity {
 					});
 		});
 
-		buttonWriteToDatabase.setOnClickListener(view ->
-				startActivity(new Intent(this, RealtimeDatabaseActivity.class))
+		buttonWriteToDatabase.setOnClickListener(view -> {
+					Intent databaseIntent = new Intent(this, RealtimeDatabaseActivity.class);
+
+					assert (username != null && email != null);
+					databaseIntent.putExtra("USERNAME", username);
+					databaseIntent.putExtra("EMAIL", email);
+
+					startActivity(databaseIntent);
+				}
 		);
 	}
 
 	@SuppressLint("SetTextI18n")
-	private void showData(String username, String email) {
+	private void showData() {
 		if (username != null)
 			textViewUserName.setText("Hello " + username);
 		if (email != null)
@@ -61,5 +67,8 @@ public class SignedInActivity extends AppCompatActivity {
 		textViewEmail = findViewById(R.id.TextView_Email);
 		buttonSignOut = findViewById(R.id.Button_SignOut);
 		buttonWriteToDatabase = findViewById(R.id.Button_WriteToDatabase);
+
+		username = getIntent().getStringExtra("USERNAME");
+		email = getIntent().getStringExtra("EMAIL");
 	}
 }

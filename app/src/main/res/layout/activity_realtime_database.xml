@@ -6,4 +6,21 @@
 	android:layout_height="match_parent"
 	tools:context=".realtime_database.RealtimeDatabaseActivity">
 
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<TextView
+			android:id="@+id/TextView_DatabaseData"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="text"
+			android:textAlignment="viewStart" />
+
+	</ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

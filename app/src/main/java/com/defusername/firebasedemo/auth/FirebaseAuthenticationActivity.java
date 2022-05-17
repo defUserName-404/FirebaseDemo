@@ -25,7 +25,7 @@ import java.util.Objects;
 public class FirebaseAuthenticationActivity extends AppCompatActivity {
 
 	private Button buttonSignIn;
-	private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+	private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,9 @@ public class FirebaseAuthenticationActivity extends AppCompatActivity {
 		IdpResponse response = result.getIdpResponse();
 		Toast toast;
 
+		if (user == null)
+			user = FirebaseAuth.getInstance().getCurrentUser();
+
 		if (result.getResultCode() == RESULT_OK) {
 			startActivity(createIntentForHomePage());
 
@@ -89,7 +92,7 @@ public class FirebaseAuthenticationActivity extends AppCompatActivity {
 		Intent signInIntent = new Intent(this, SignedInActivity.class);
 
 		assert user != null;
-		signInIntent.putExtra("USER_NAME", user.getDisplayName());
+		signInIntent.putExtra("USERNAME", user.getDisplayName());
 		signInIntent.putExtra("EMAIL", user.getEmail());
 
 		return signInIntent;
