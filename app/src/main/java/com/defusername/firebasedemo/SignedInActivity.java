@@ -56,9 +56,9 @@ public class SignedInActivity extends AppCompatActivity {
 	@SuppressLint("SetTextI18n")
 	private void showData() {
 		if (username != null)
-			textViewUserName.setText("Hello " + username);
+			textViewUserName.setText("Username: " + username);
 		if (email != null)
-			textViewEmail.setText("Your email is " + email);
+			textViewEmail.setText("Email: " + email);
 	}
 
 	private void initViews() {

@@ -4,45 +4,103 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:padding="8dp"
 	tools:context=".SignedInActivity">
 
-	<TextView
-		android:id="@+id/TextView_UserName"
+	<androidx.cardview.widget.CardView
+		android:id="@+id/cardView"
+		style="@style/Widget.Material3.CardView.Outlined"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="text"
-		android:textAlignment="center"
-		android:textSize="25sp"
-		app:layout_constraintBottom_toTopOf="@+id/TextView_Email"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintVertical_bias="0.2"
-		app:layout_constraintVertical_chainStyle="packed" />
-
-	<TextView
-		android:id="@+id/TextView_Email"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="text"
-		android:textAlignment="center"
-		android:textSize="20sp"
-		app:layout_constraintBottom_toBottomOf="parent"
+		app:cardElevation="120dp"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/TextView_UserName" />
+		app:layout_constraintTop_toTopOf="parent">
 
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<ImageView
+				android:id="@+id/ImageView_ProfilePicture"
+				android:layout_width="0dp"
+				android:layout_height="24dp"
+				android:contentDescription="Profile Picture"
+				android:src="@drawable/ic_launcher_background"
+				app:layout_constraintBottom_toTopOf="@+id/TextView_Email"
+				app:layout_constraintEnd_toStartOf="@+id/TextView_UserName"
+				app:layout_constraintHorizontal_bias="0.4"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+
+			<TextView
+				android:id="@+id/TextView_UserName"
+				android:layout_width="0dp"
+				android:layout_height="24dp"
+				android:text="username"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.6"
+				app:layout_constraintStart_toEndOf="@+id/ImageView_ProfilePicture"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<TextView
+				android:id="@+id/TextView_Email"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:text="email"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toStartOf="@+id/TextView_Age"
+				app:layout_constraintHorizontal_bias="0.5"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/TextView_UserName" />
+
+			<TextView
+				android:id="@+id/TextView_Age"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:text="age"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintHorizontal_bias="0.5"
+				app:layout_constraintStart_toEndOf="@+id/TextView_Email"
+				app:layout_constraintTop_toBottomOf="@id/TextView_UserName" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</androidx.cardview.widget.CardView>
+
+	<EditText
+		android:id="@+id/editText2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:autofillHints="Enter your name"
+		android:hint="Enter your age"
+		android:inputType="number"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/cardView" />
 
 	<Button
 		android:id="@+id/Button_WriteToDatabase"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="20dp"
-		android:text="Write TO Database"
+		android:text="Save Your Profile"
 		app:layout_constraintBottom_toTopOf="@+id/Button_SignOut"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintHorizontal_bias="0.5"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/TextView_Email" />
+		app:layout_constraintTop_toBottomOf="@+id/editText2" />
+
+	<Button
+		android:id="@+id/Button_StoreFile"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="20dp"
+		android:text="Set Profile Picture"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/Button_WriteToDatabase" />
 
 	<Button
 		android:id="@+id/Button_SignOut"
@@ -53,7 +111,6 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.5"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toBottomOf="@+id/Button_WriteToDatabase" />
+		app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
