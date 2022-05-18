@@ -10,6 +10,7 @@ import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.defusername.firebasedemo.R;
+import com.defusername.firebasedemo.SignedInActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -21,10 +22,10 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class FirebaseAuthentication extends AppCompatActivity {
+public class FirebaseAuthenticationActivity extends AppCompatActivity {
 
 	private Button buttonSignIn;
-	private final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+	private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,9 @@ public class FirebaseAuthentication extends AppCompatActivity {
 		IdpResponse response = result.getIdpResponse();
 		Toast toast;
 
+		if (user == null)
+			user = FirebaseAuth.getInstance().getCurrentUser();
+
 		if (result.getResultCode() == RESULT_OK) {
 			startActivity(createIntentForHomePage());
 
@@ -88,7 +92,7 @@ public class FirebaseAuthentication extends AppCompatActivity {
 		Intent signInIntent = new Intent(this, SignedInActivity.class);
 
 		assert user != null;
-		signInIntent.putExtra("USER_NAME", user.getDisplayName());
+		signInIntent.putExtra("USERNAME", user.getDisplayName());
 		signInIntent.putExtra("EMAIL", user.getEmail());
 
 		return signInIntent;

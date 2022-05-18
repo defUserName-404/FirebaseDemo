@@ -12,22 +12,20 @@
 		android:supportsRtl="true"
 		android:theme="@style/Theme.FirebaseDemo">
 		<activity
-			android:name=".auth.SignedInActivity"
+			android:name=".realtime_database.RealtimeDatabaseActivity"
 			android:exported="false" />
 		<activity
-			android:name=".auth.FirebaseAuthentication"
+			android:name=".SignedInActivity"
+			android:exported="false" />
+		<activity
+			android:name=".auth.FirebaseAuthenticationActivity"
 			android:exported="true">
-
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-
-		<activity
-			android:name=".MainActivity"
-			android:exported="true" />
 	</application>
 
 </manifest>
