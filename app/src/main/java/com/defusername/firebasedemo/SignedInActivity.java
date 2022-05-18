@@ -11,7 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.defusername.firebasedemo.auth.FirebaseAuthenticationActivity;
-import com.defusername.firebasedemo.realtime_database.RealtimeDatabaseActivity;
+import com.defusername.firebasedemo.auth.User;
+import com.defusername.firebasedemo.realtime_database.RealtimeDatabase;
 import com.firebase.ui.auth.AuthUI;
 
 public class SignedInActivity extends AppCompatActivity {
@@ -19,6 +20,7 @@ public class SignedInActivity extends AppCompatActivity {
 	private TextView textViewUserName, textViewEmail;
 	private Button buttonSignOut, buttonWriteToDatabase;
 	private String username, email;
+	private RealtimeDatabase firebaseRealtimeDatabase;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +46,9 @@ public class SignedInActivity extends AppCompatActivity {
 		});
 
 		buttonWriteToDatabase.setOnClickListener(view -> {
-					Toast.makeText(this, "Write to database successful", Toast.LENGTH_SHORT).show();
-					
-					Intent databaseIntent = new Intent(this, RealtimeDatabaseActivity.class);
-
-					assert (username != null && email != null);
-					databaseIntent.putExtra("USERNAME", username);
-					databaseIntent.putExtra("EMAIL", email);
-
-					startActivity(databaseIntent);
+					User user = new User(username, email);
+					if (firebaseRealtimeDatabase.writeToDatabase(user))
+						Toast.makeText(this, "Write to database successful", Toast.LENGTH_SHORT).show();
 				}
 		);
 	}
@@ -73,5 +69,6 @@ public class SignedInActivity extends AppCompatActivity {
 
 		username = getIntent().getStringExtra("USERNAME");
 		email = getIntent().getStringExtra("EMAIL");
+		firebaseRealtimeDatabase = RealtimeDatabase.getInstance();
 	}
 }
