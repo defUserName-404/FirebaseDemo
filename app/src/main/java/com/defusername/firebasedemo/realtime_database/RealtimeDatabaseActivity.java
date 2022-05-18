@@ -1,11 +1,12 @@
 package com.defusername.firebasedemo.realtime_database;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.defusername.firebasedemo.R;
 import com.defusername.firebasedemo.auth.User;
@@ -18,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 public class RealtimeDatabaseActivity extends AppCompatActivity {
 
 	private TextView textViewDatabaseData;
-	private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User");
+	private final DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("Users");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,6 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 
 		initViews();
 		writeToDatabase();
-		onDataChange();
 	}
 
 	private void initViews() {
@@ -39,20 +39,30 @@ public class RealtimeDatabaseActivity extends AppCompatActivity {
 		String email = getIntent().getStringExtra("EMAIL");
 		User user = new User(username, email);
 
-		databaseReference.setValue(user);
-	}
-
-	private void onDataChange() {
-		databaseReference.addValueEventListener(new ValueEventListener() {
+		databaseRef.addValueEventListener(new ValueEventListener() {
 			@Override
 			public void onDataChange(@NonNull DataSnapshot snapshot) {
-//				String value = snapshot.getValue(String.class);
-//				textViewDatabaseData.setText(value);
+				for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+					User tempUser = userSnapshot.getValue(User.class);
+
+					assert tempUser != null;
+					if (tempUser.getUsername().equals(user.getUsername())
+							&& tempUser.getEmail().equals(user.getEmail())) {
+						Toast.makeText(RealtimeDatabaseActivity.this,
+								"User already added", Toast.LENGTH_SHORT)
+								.show();
+						return;
+					}
+				}
+
+				databaseRef
+						.push()
+						.setValue(user);
 			}
 
 			@Override
 			public void onCancelled(@NonNull DatabaseError error) {
-				Log.e("REALTIME_DATABASE", "Failed to read value", error.toException());
+				Log.e("DATABASE_ACTIVITY", "Database error", error.toException());
 			}
 		});
 	}

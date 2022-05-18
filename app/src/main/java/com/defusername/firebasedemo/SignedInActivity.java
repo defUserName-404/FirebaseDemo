@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +44,8 @@ public class SignedInActivity extends AppCompatActivity {
 		});
 
 		buttonWriteToDatabase.setOnClickListener(view -> {
+					Toast.makeText(this, "Write to database successful", Toast.LENGTH_SHORT).show();
+					
 					Intent databaseIntent = new Intent(this, RealtimeDatabaseActivity.class);
 
 					assert (username != null && email != null);

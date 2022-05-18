@@ -1,7 +1,11 @@
 package com.defusername.firebasedemo.auth;
 
 public class User {
-	private final String username, email;
+	private String username, email;
+
+	// No argument constructor required for firebase
+	public User() {
+	}
 
 	public User(String username, String email) {
 		this.username = username;
