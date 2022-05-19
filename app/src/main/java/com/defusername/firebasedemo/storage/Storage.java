@@ -14,8 +14,10 @@ public class Storage {
 
 	private static Storage instance;
 	private final StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+	private final StorageReference profilePictureRef;
 
 	private Storage() {
+		profilePictureRef = storageRef.child("profile_pictures");
 	}
 
 	public static Storage getInstance() {
@@ -26,7 +28,7 @@ public class Storage {
 	}
 
 	public void uploadPicture(Uri imageUri, String fileName) {
-		StorageReference imageRef = storageRef.child("images/" + fileName + ".jpg");
+		StorageReference imageRef = profilePictureRef.child(fileName);
 
 		imageRef.putFile(imageUri)
 				.addOnFailureListener(exception -> {
