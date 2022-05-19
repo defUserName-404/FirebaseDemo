@@ -6,6 +6,10 @@ import android.util.Log;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+
+/*
+	Singleton class for handling storage operations
+ */
 public class Storage {
 
 	private static Storage instance;
