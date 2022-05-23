@@ -2,6 +2,7 @@ package com.defusername.firebasedemo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class SignedInActivity extends AppCompatActivity {
 	private ImageView imageViewProfilePicture;
 	private String username, email;
 	private RealtimeDatabase firebaseRealtimeDatabase;
+	private Storage firebaseStorage;
 	private static final int SELECT_IMAGE_CODE = 2;
 
 	@Override
@@ -53,8 +55,8 @@ public class SignedInActivity extends AppCompatActivity {
 					User user = new User(username, email);
 					if (firebaseRealtimeDatabase.writeToDatabase(user))
 						Toast.makeText(this, "Write to database successful",
-								Toast.LENGTH_SHORT).
-								show();
+								Toast.LENGTH_SHORT)
+								.show();
 				}
 		);
 
@@ -72,16 +74,28 @@ public class SignedInActivity extends AppCompatActivity {
 			textViewUserName.setText("Username: " + username);
 		if (email != null)
 			textViewEmail.setText("Email: " + email);
+
+		if (firebaseStorage.doesDownloadLocationExist()) {
+			imageViewProfilePicture.setImageBitmap(
+					BitmapFactory.decodeFile("/storage/emulated/0/Android/data/com.defusername.firebasedemo/files/Pictures/Profile Pictures/Nafi Rahman"));
+		} else {
+			firebaseStorage.downloadPicture(this, username);
+		}
 	}
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (requestCode == SELECT_IMAGE_CODE) {
-			assert data != null;
-			Storage.getInstance()
-					.uploadPicture(data.getData(), username);
+			if (data == null) {
+				Log.e("Text", "Image is null");
+				return;
+			}
+
+			firebaseStorage.uploadPicture(data.getData(), username);
+			firebaseStorage.downloadPicture(this, username);
 		}
 	}
 
@@ -96,5 +110,6 @@ public class SignedInActivity extends AppCompatActivity {
 		username = getIntent().getStringExtra("USERNAME");
 		email = getIntent().getStringExtra("EMAIL");
 		firebaseRealtimeDatabase = RealtimeDatabase.getInstance();
+		firebaseStorage = Storage.getInstance();
 	}
 }
