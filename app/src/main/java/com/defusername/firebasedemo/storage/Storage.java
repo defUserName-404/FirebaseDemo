@@ -1,7 +1,6 @@
 package com.defusername.firebasedemo.storage;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -18,7 +17,6 @@ public class Storage {
 
 	private static Storage instance;
 	private final StorageReference profilePictureRef;
-	private Bitmap bitmapImage;
 	private static final String TAG = "STORAGE_OPERATION";
 
 	private Storage() {
