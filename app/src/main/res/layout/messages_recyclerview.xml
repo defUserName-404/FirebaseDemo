@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:padding="8dp">
+
+	<com.google.android.material.card.MaterialCardView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:cardCornerRadius="8dp"
+		app:cardElevation="16dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:strokeColor="?attr/colorPrimary">
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:padding="4dp">
+
+			<ImageView
+				android:id="@+id/ImageView_ProfilePictureMessage"
+				android:layout_width="32dp"
+				android:layout_height="32dp"
+				android:src="@drawable/ic_launcher_background"
+				app:layout_constraintBottom_toBottomOf="@+id/TextView_Message"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="@+id/TextView_UsernameInMessage" />
+
+			<TextView
+				android:id="@+id/TextView_UsernameInMessage"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="4dp"
+				android:text="Username"
+				android:textStyle="bold"
+				app:layout_constraintStart_toEndOf="@+id/ImageView_ProfilePictureMessage"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<TextView
+				android:id="@+id/TextView_TimeMessageSent"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Time"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent" />
+
+			<TextView
+				android:id="@+id/TextView_Message"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:lines="1"
+				android:text="Message"
+				app:layout_constraintStart_toStartOf="@+id/TextView_UsernameInMessage"
+				app:layout_constraintTop_toBottomOf="@+id/TextView_UsernameInMessage" />
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+	</com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

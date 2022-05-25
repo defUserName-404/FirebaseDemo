@@ -1,4 +1,4 @@
-package com.defusername.firebasedemo.auth;
+package com.defusername.firebasedemo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.MainThread;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.defusername.firebasedemo.R;
-import com.defusername.firebasedemo.SignedInActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;

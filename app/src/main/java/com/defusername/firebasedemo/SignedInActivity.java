@@ -13,8 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.defusername.firebasedemo.auth.FirebaseAuthenticationActivity;
-import com.defusername.firebasedemo.auth.User;
+import com.defusername.firebasedemo.model.User;
 import com.defusername.firebasedemo.realtime_database.RealtimeDatabase;
 import com.defusername.firebasedemo.storage.Storage;
 import com.firebase.ui.auth.AuthUI;
@@ -22,7 +21,7 @@ import com.firebase.ui.auth.AuthUI;
 public class SignedInActivity extends AppCompatActivity {
 
 	private TextView textViewUserName, textViewEmail;
-	private Button buttonSignOut, buttonWriteToDatabase, buttonSetProfilePicture;
+	private Button buttonSignOut, buttonWriteToDatabase, buttonSetProfilePicture, buttonSendMessage;
 	private ImageView imageViewProfilePicture;
 	private String username, email;
 	private RealtimeDatabase firebaseRealtimeDatabase;
@@ -66,6 +65,11 @@ public class SignedInActivity extends AppCompatActivity {
 			intent.setAction(Intent.ACTION_GET_CONTENT);
 			startActivityForResult(Intent.createChooser(intent, "Title"), SELECT_IMAGE_CODE);
 		});
+
+		buttonSendMessage.setOnClickListener(view -> {
+			Intent startSendMessageActivityIntent = new Intent(this, SendMessageActivity.class);
+			startActivity(startSendMessageActivityIntent);
+		});
 	}
 
 	@SuppressLint("SetTextI18n")
@@ -82,7 +86,6 @@ public class SignedInActivity extends AppCompatActivity {
 			firebaseStorage.downloadPicture(this, username);
 		}
 	}
-
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -105,6 +108,7 @@ public class SignedInActivity extends AppCompatActivity {
 		buttonSignOut = findViewById(R.id.Button_SignOut);
 		buttonWriteToDatabase = findViewById(R.id.Button_WriteToDatabase);
 		buttonSetProfilePicture = findViewById(R.id.Button_SetProfilePicture);
+		buttonSendMessage = findViewById(R.id.Button_SendMessage);
 		imageViewProfilePicture = findViewById(R.id.ImageView_ProfilePicture);
 
 		username = getIntent().getStringExtra("USERNAME");

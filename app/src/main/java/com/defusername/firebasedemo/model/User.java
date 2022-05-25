@@ -1,4 +1,4 @@
-package com.defusername.firebasedemo.auth;
+package com.defusername.firebasedemo.model;
 
 public class User {
 	private String username, email;
